@@ -74,8 +74,6 @@ export interface MarkdownItOptions {
 }
 
 export interface MarkdownIt {
-    new(preset?:string, options?:MarkdownItOptions): MarkdownIt;
-
     block: ParserBlock;
     core: Core;
     helpers: any;
@@ -98,3 +96,5 @@ export interface MarkdownIt {
     use(plugin: any): MarkdownIt;
     render(src: string): string;
 }
+
+export function MarkdownIt(preset?:string, options?:MarkdownItOptions): void;

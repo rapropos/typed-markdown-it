@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "bundle": "typings bundle . -o bundle",
+    "test": "npm run bundle && ts-node test.ts"
+  },
+  "devDependencies": {
+    "markdown-it": "^6.0.0",
+    "ts-node": "^0.7.1",
+    "typings": "^0.7.9"
+  }
+}

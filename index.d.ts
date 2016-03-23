@@ -1,4 +1,10 @@
-export interface Token {
+declare var MarkdownIt: {
+  (preset?: string, options?: MarkdownIt.Options): MarkdownIt.MarkdownIt;
+  new (preset?: string, options?: MarkdownIt.Options): MarkdownIt.MarkdownIt;
+}
+
+declare namespace MarkdownIt {
+  export interface Token {
     attrs: string[][];
     block: boolean;
     children: Token[];
@@ -17,63 +23,63 @@ export interface Token {
     attrJoin(name: string, value: string): void;
     attrPush(attr: string[]): void;
     attrSet(name: string, value: string): void;
-}
+  }
 
-export interface Rule {
+  export interface Rule {
     (state: any): void;
-}
+  }
 
-export interface Ruler {
+  export interface Ruler {
     after(afterName: string, ruleName: string, rule: Rule, options?: any): void;
     at(name: string, rule: Rule, options?: any): void;
     before(beforeName: string, ruleName: string, rule: Rule, options?: any): void;
-    disable(rules: string|string[], ignoreInvalid?: boolean): string[];
-    enable(rules: string|string[], ignoreInvalid?: boolean): string[];
+    disable(rules: string | string[], ignoreInvalid?: boolean): string[];
+    enable(rules: string | string[], ignoreInvalid?: boolean): string[];
     enableOnly(rule: string, ignoreInvalid?: boolean): void;
     getRules(chain: string): Rule[];
     push(ruleName: string, rule: Rule, options?: any): void;
-}
+  }
 
-export interface RendererRule {
+  export interface RendererRule {
     (tokens: Token[], ix: number, options: any, env: any, md: MarkdownIt): string;
-}
+  }
 
-export interface Renderer {
+  export interface Renderer {
     render(tokens: Token[], options: any, env: any): string;
     renderAttrs(token: Token): string;
     renderInline(tokens: Token[], options: any, env: any): string;
     renderToken(tokens: Token[], idx: number, options?: any): string;
-    rules: {[tokenType: string]: RendererRule};
-}
+    rules: { [tokenType: string]: RendererRule };
+  }
 
-export interface ParserBlock {
+  export interface ParserBlock {
     parse(src: string, md: MarkdownIt, env: any, outTokens: Token[]): void;
     ruler: Ruler;
-}
+  }
 
-export interface Core {
+  export interface Core {
     process(state: any): void;
     ruler: Ruler;
-}
+  }
 
-export interface ParserInline {
+  export interface ParserInline {
     parse(src: string, md: MarkdownIt, env: any, outTokens: Token[]): void;
     ruler: Ruler;
     ruler2: Ruler;
-}
+  }
 
-export interface MarkdownItOptions {
+  export interface Options {
     html?: boolean;
     xhtmlOut?: boolean;
     breaks?: boolean;
     langPrefix?: string;
     linkify?: boolean;
     typographer?: boolean;
-    quotes?: string|string[];
+    quotes?: string | string[];
     highlight?: (str:string, lang:string) => string;
-}
+  }
 
-export interface MarkdownIt {
+  export interface MarkdownIt {
     block: ParserBlock;
     core: Core;
     helpers: any;
@@ -87,14 +93,15 @@ export interface MarkdownIt {
     normalizeLinkText: {(url: string): string};
     validateLink: {(url: string): string};
 
-    disable(rules: string|string[], ignoreInvalid?: boolean): MarkdownIt;
-    enable(rules: string|string[], ignoreInvalid?: boolean): MarkdownIt;
+    disable(rules: string | string[], ignoreInvalid?: boolean): MarkdownIt;
+    enable(rules: string | string[], ignoreInvalid?: boolean): MarkdownIt;
     parse(src: string, env: any): Token[];
     parseInline(src: string, env: any): Token[];
     render(src: string, env: any): string;
     renderInline(src: string, env: any): string;
     use(plugin: any): MarkdownIt;
     render(src: string): string;
+  }
 }
 
-export function MarkdownIt(preset?:string, options?:MarkdownItOptions): void;
+export = MarkdownIt;

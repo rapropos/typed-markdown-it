@@ -1,1 +1,4 @@
 .idea
+typings/
+node_modules/
+bundle/

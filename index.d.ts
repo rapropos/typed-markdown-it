@@ -99,7 +99,7 @@ declare namespace MarkdownIt {
     parseInline(src: string, env: any): Token[];
     render(src: string, env: any): string;
     renderInline(src: string, env: any): string;
-    use(plugin: any): MarkdownIt;
+    use(plugin: any, ...params: any[]): MarkdownIt;
     render(src: string): string;
   }
 }
